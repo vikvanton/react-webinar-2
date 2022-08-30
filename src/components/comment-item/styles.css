@@ -23,6 +23,7 @@
 
 .CommentItem-text {
     font-size: 14px;
+    word-break: break-all;
 }
 
 .CommentItem-text pre {

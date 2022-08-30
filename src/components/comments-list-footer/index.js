@@ -10,8 +10,11 @@ function CommentsListFooter(props) {
 
   const callbacks = {
     onSend: useCallback(() => {
-      props.postComment(ref.current.value);
-      ref.current.value = "Текст";
+      if (ref.current.value.trim() === "") alert("Нельзя отправить пустое сообщение!");
+      else {
+        props.postComment(ref.current.value);
+        ref.current.value = "Текст";
+      }
     }, [props.postComment])
   };
 
@@ -24,7 +27,7 @@ function CommentsListFooter(props) {
             <button onClick={callbacks.onSend}>Отправить</button>
           </div> 
         : <div>
-            {props.renderLink()}, чтобы иметь возможность комментировать
+            <a onClick={props.link}>Войдите</a>, чтобы иметь возможность комментировать
           </div>
       }
     </div>
@@ -33,7 +36,7 @@ function CommentsListFooter(props) {
 
 CommentsListFooter.propTypes = {
   session: propTypes.bool.isRequired,
-  renderLink: propTypes.func.isRequired,
+  link: propTypes.func.isRequired,
   postComment: propTypes.func.isRequired,
   show: propTypes.bool.isRequired
 }

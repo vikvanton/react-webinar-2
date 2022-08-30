@@ -28,10 +28,13 @@ function CommentItemFooter(props) {
   };
 
   const onSend = () => {
-    props.postComment(ref.current.value);
-    ref.current.value = `Мой ответ для ${props.userName}`;
-    props.setItemFooter(''); 
-    props.setListFooter(true);
+    if (ref.current.value.trim() === "") alert("Нельзя отправить пустое сообщение!");
+    else {
+      props.postComment(ref.current.value);
+      ref.current.value = `Мой ответ для ${props.userName}`;
+      props.setItemFooter(''); 
+      props.setListFooter(true);
+    };
   }
 
   return (
@@ -44,7 +47,7 @@ function CommentItemFooter(props) {
             <button onClick={callbacks.onClick}>Отмена</button>
           </div>  
         : <div>
-            {props.renderLink()}, чтобы иметь возможность ответить. <span onClick={onClick}>Отмена</span>
+            <a onClick={props.link}>Войдите</a>, чтобы иметь возможность ответить. <span onClick={onClick}>Отмена</span>
           </div>
       }
     </div>
@@ -54,7 +57,7 @@ function CommentItemFooter(props) {
 CommentItemFooter.propTypes = {
   session: propTypes.bool.isRequired,
   userName: propTypes.string.isRequired,
-  renderLink: propTypes.func.isRequired,
+  link: propTypes.func.isRequired,
   postComment: propTypes.func.isRequired,
   show: propTypes.string.isRequired,
   setItemFooter: propTypes.func.isRequired,

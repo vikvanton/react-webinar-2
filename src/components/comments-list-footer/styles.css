@@ -12,6 +12,7 @@
     color: #0087E9;
     text-decoration: none;
     border-bottom: 1.4px solid #0087E9;
+    cursor: pointer;
 }
 
 .CommentsListFooter-form-header {

@@ -28,6 +28,9 @@ const initialState = {
 
       case "comments/clear-error":
         return { ...state, error: ''};
+
+    case "comments/clear-items":
+        return { ...state, items: []};
   
       default:
         // Нет изменений

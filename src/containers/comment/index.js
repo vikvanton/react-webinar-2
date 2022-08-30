@@ -1,5 +1,5 @@
 import React, {useCallback} from "react";
-import {Link} from "react-router-dom"
+import {useLocation, useNavigate} from "react-router-dom"
 import propTypes from "prop-types";
 import {useStore as useStoreRedux} from "react-redux";
 import actionsComments from "../../store-redux/comments/actions";
@@ -8,6 +8,9 @@ import CommentItem from "../../components/comment-item";
 import CommentItemFooter from "../../components/comment-item-footer";
 
 function CommentContainer(props) {
+  const navigate = useNavigate();
+  const location = useLocation();
+
   const storeRedux = useStoreRedux();
 
   const selectStore = useSelector(state => ({
@@ -22,18 +25,15 @@ function CommentContainer(props) {
         _type: "comment"
       }
     })), []),
+    link: useCallback(() => navigate('/login', {state: {back: location.pathname}}), []),
   };
-
-  const renders = {
-    link: useCallback(() => <Link to="/login">Войдите</Link>, []),
-  }
 
   return (
     <CommentItem comment={props.comment} setItemFooter={props.setItemFooter} setListFooter={props.setListFooter}>
       <CommentItemFooter 
         session={selectStore.exists}
         userName={props.comment.author.profile.name} 
-        renderLink={renders.link} 
+        link={callbacks.link} 
         postComment={callbacks.postComment}
         show={props.itemFooter}
         setItemFooter={props.setItemFooter}

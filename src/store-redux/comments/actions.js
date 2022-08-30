@@ -36,5 +36,6 @@ export default {
       }  
     },
 
-    clearError: () => ({type: 'comments/clear-error'})
+    clearError: () => ({type: 'comments/clear-error'}),
+    clearItems: () => ({type: 'comments/clear-items'})
   }

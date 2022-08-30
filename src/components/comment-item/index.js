@@ -14,7 +14,7 @@ function CommentItem(props) {
   };
 
   return (
-    <div style={{marginLeft: `${props.comment.level * 30}px`}} className={cn()}>
+    <div style={{marginLeft: `${props.comment.level > 5 ? 150 : props.comment.level * 30}px`}} className={cn()}>
       <div className={cn('header')}>
         <span>{props.comment.author.profile.name}</span>
         <span>
